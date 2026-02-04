@@ -1,0 +1,350 @@
+/**
+ * ImageCapture.css
+ * Styles for image capture and management
+ */
+
+.image-capture-container {
+  width: 100%;
+}
+
+/* Image Grid */
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+.image-slot {
+  aspect-ratio: 4/3;
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  position: relative;
+  transition: all var(--transition-base);
+}
+
+.image-slot.empty {
+  border: 2px dashed var(--gray-300);
+  background: var(--gray-50);
+}
+
+.image-slot.filled {
+  border: 2px solid var(--gray-200);
+  box-shadow: var(--shadow-sm);
+}
+
+.image-slot:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+/* Empty Slot */
+.empty-slot {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-lg);
+  gap: var(--spacing-md);
+  background: linear-gradient(135deg, var(--gray-50) 0%, white 100%);
+}
+
+.slot-icon {
+  font-size: 3rem;
+  opacity: 0.5;
+  transition: all var(--transition-base);
+}
+
+.image-slot:hover .slot-icon {
+  opacity: 0.8;
+  transform: scale(1.1);
+}
+
+.slot-label {
+  font-weight: 600;
+  color: var(--gray-700);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.slot-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  width: 100%;
+}
+
+.capture-button,
+.upload-button {
+  flex: 1;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid var(--gray-300);
+  border-radius: var(--border-radius-md);
+  background: white;
+  color: var(--gray-700);
+  font-weight: 600;
+  font-size: 0.75rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
+  transition: all var(--transition-fast);
+}
+
+.capture-button:hover,
+.upload-button:hover {
+  border-color: var(--primary-color);
+  background: var(--gray-50);
+  color: var(--primary-color);
+  transform: translateY(-1px);
+}
+
+.capture-button svg,
+.upload-button svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Filled Slot */
+.filled-slot {
+  position: relative;
+  height: 100%;
+  background: var(--gray-900);
+}
+
+.filled-slot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--spacing-md);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.filled-slot:hover .image-overlay {
+  opacity: 1;
+}
+
+.image-label {
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--border-radius-sm);
+  font-weight: 600;
+  font-size: 0.75rem;
+  align-self: flex-start;
+  backdrop-filter: blur(10px);
+}
+
+.remove-button {
+  background: var(--error-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-sm);
+  cursor: pointer;
+  align-self: flex-end;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-md);
+}
+
+.remove-button:hover {
+  background: #dc2626;
+  transform: scale(1.1);
+}
+
+/* Camera Modal */
+.camera-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: var(--spacing-md);
+  animation: fadeIn 0.2s ease-out;
+}
+
+.camera-modal {
+  background: var(--gray-900);
+  border-radius: var(--border-radius-lg);
+  max-width: 800px;
+  width: 100%;
+  max-height: 95vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-xl);
+  animation: scaleIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.camera-header {
+  padding: var(--spacing-lg) var(--spacing-xl);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+.camera-header h3 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: white;
+}
+
+.camera-modal .close-button {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.camera-modal .close-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.camera-preview-container {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gray-900);
+}
+
+.camera-video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.camera-controls {
+  position: absolute;
+  bottom: var(--spacing-2xl);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: var(--spacing-lg);
+  align-items: center;
+}
+
+.capture-photo-button {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.capture-photo-button:hover {
+  background: white;
+  transform: scale(1.05);
+}
+
+.capture-photo-button:active {
+  transform: scale(0.95);
+}
+
+.camera-guide {
+  position: absolute;
+  top: var(--spacing-xl);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: var(--spacing-md) var(--spacing-xl);
+  border-radius: var(--border-radius-md);
+  backdrop-filter: blur(10px);
+  max-width: 90%;
+}
+
+.guide-text {
+  font-weight: 500;
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+/* Info Banner */
+.image-info-banner {
+  background: var(--gray-100);
+  border: 1px solid var(--gray-300);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  color: var(--gray-700);
+  font-size: 0.875rem;
+}
+
+.image-info-banner svg {
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .image-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .camera-modal {
+    max-height: 100vh;
+    border-radius: 0;
+  }
+  
+  .camera-controls {
+    bottom: var(--spacing-xl);
+  }
+  
+  .capture-photo-button {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .camera-guide {
+    top: var(--spacing-lg);
+    padding: var(--spacing-sm) var(--spacing-lg);
+  }
+  
+  .guide-text {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .slot-actions {
+    flex-direction: column;
+  }
+  
+  .capture-button,
+  .upload-button {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
