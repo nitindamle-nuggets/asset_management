@@ -9,7 +9,9 @@ export default defineConfig({
   plugins: [react()],
   server: {
     host: true,
-    allowedHosts: "restrictively-unfleeced-blanche.ngrok-free.dev"
+    allowedHosts: [
+      "restrictively-unfleeced-blanche.ngrok-free.dev"
+    ]
   }
 })
 // export default {
