@@ -8,7 +8,7 @@ app = Flask(__name__)
 CORS(app)
 
 # PostgreSQL config
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:AssetApp123@localhost:5432/postgres"
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:AssetApp123@asset-app-db.c3c2c4ko25fv.ap-south-1.rds.amazonaws.com:5432/postgres"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
