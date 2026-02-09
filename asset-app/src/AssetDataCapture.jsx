@@ -347,7 +347,7 @@ console.log(payload);
       showToast('Saved offline. Will sync when online.', 'warning');
     } else {
       // ✅ REAL API CALL TO FLASK
-      const response = await fetch("https://restrictively-unfleeced-blanche.ngrok-free.dev/api/assets", {
+      const response = await fetch("/api/assets", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
